@@ -53,7 +53,7 @@ class BooksController extends Controller
 
             $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
 
-            $request->image->$uploadedFileUrl;
+            // $request->image->$uploadedFileUrl;
 
             $data['image'] = $uploadedFileUrl;
 
@@ -62,7 +62,8 @@ class BooksController extends Controller
         Books::create($data);
 
        return response()->json([
-            "message" => "Data buku berhasil ditambahkan"
+            "message" => "Data buku berhasil ditambahkan",
+            "url" => $uploadedFileUrl,
        ]);
     }
 
