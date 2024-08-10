@@ -110,23 +110,23 @@ class BooksController extends Controller
 
             // Hapus gambar lama jika ada
 
-            if ($booksData->image) {
-                $nameImage = basename($booksData->image);
-                Storage::delete('public/images/' . $nameImage);
-                // return response()->json($data);
-            }
+            // if ($booksData->image) {
+            //     $nameImage = basename($booksData->image);
+            //     Storage::delete('public/images/' . $nameImage);
+            //     // return response()->json($data);
+            // }
 
-            $imageName = time().'.'.$request->image->extension();
+            // $imageName = time().'.'.$request->image->extension();
 
-            $request->image->storeAs('public/images', $imageName);
+            // $request->image->storeAs('public/images', $imageName);
 
-            $path = env('APP_URL').'/storage/images/';
+            // $path = env('APP_URL').'/storage/images/';
 
-            $data['image'] = $path.$imageName;
+            // $data['image'] = $path.$imageName;
 
-            // $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
 
-            // $data['image'] = $uploadedFileUrl;
+            $data['image'] = $uploadedFileUrl;
 
         }
 
