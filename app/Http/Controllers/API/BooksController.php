@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Books;
 use App\Http\Requests\BooksRequest;
 use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class BooksController extends Controller
 {
@@ -38,17 +39,23 @@ class BooksController extends Controller
 
             // membuat unique name pada gamabr yang di input
 
-            $imageName = time().'.'.$request->image->extension();
+            // $imageName = time().'.'.$request->image->extension();
 
             // simpan gambar pada file storage
 
-            $request->image->storeAs('public/images', $imageName);
+            // $request->image->storeAs('public/images', $imageName);
 
             // menganti request nilai request image menjadi $imageName yang baru bukan berdasarkan request
 
-            $path = env('APP_URL').'/storage/images/';
+            // $path = env('APP_URL').'/storage/images/';
 
-            $data['image'] = $path.$imageName;
+            // $data['image'] = $path.$imageName;
+
+            $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+
+            $request->image->$uploadedFileUrl;
+
+            $data['image'] = $uploadedFileUrl;
 
        }
 
