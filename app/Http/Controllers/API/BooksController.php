@@ -110,11 +110,11 @@ class BooksController extends Controller
 
             // Hapus gambar lama jika ada
 
-            if ($booksData->image) {
-                $nameImage = basename($booksData->image);
-                Storage::delete('public/images/' . $nameImage);
-                // return response()->json($data);
-            }
+            // if ($booksData->image) {
+            //     $nameImage = basename($booksData->image);
+            //     Storage::delete('public/images/' . $nameImage);
+            //     // return response()->json($data);
+            // }
 
             // $imageName = time().'.'.$request->image->extension();
 
