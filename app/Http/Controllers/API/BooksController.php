@@ -116,13 +116,17 @@ class BooksController extends Controller
                 // return response()->json($data);
             }
 
-            $imageName = time().'.'.$request->image->extension();
+            // $imageName = time().'.'.$request->image->extension();
 
-            $request->image->storeAs('public/images', $imageName);
+            // $request->image->storeAs('public/images', $imageName);
 
-            $path = env('APP_URL').'/storage/images/';
+            // $path = env('APP_URL').'/storage/images/';
 
-            $data['image'] = $path.$imageName;
+            // $data['image'] = $path.$imageName;
+
+            $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+
+            $data['image'] = $uploadedFileUrl;
 
         }
 
